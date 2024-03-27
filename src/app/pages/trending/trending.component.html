@@ -1,8 +1,0 @@
-<app-top-titles label="Trending">
-    <form  [formGroup]="timeWindowForm">
-        <p-radioButton label="Day" formControlName="timewindow" value="day" (onClick)="updateTimeWindow()"></p-radioButton>
-        <p-radioButton label="Week" formControlName="timewindow" value="week" (onClick)="updateTimeWindow()"></p-radioButton>
-      </form>
-    <app-switcher [data]="['All','Movies','Tv','Celebrities']" [routes]="['/trending','movies','tvshows','celebrities']" [active]="activeTab"></app-switcher>
-</app-top-titles>
-<router-outlet></router-outlet>
