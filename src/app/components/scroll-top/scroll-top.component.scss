@@ -1,0 +1,8 @@
+.scroll-top{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    transition: visibility 1s !important;
+    z-index: 10000;
+    border-radius: 50%;
+}

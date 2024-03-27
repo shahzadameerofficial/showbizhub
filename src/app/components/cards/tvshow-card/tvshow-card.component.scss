@@ -1,0 +1,89 @@
+.tvshow {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    &:hover{
+        img{
+            filter: brightness(80%) saturate(70%);
+        }
+    }
+
+    .float-details {
+        position: absolute;
+        top: 0;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        z-index: 2;
+        padding: 10px;
+        width: 100%;
+        .episodes {
+            background-color: rgb(37, 37, 37);
+            padding: 0px 5px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+        }
+        button{
+            border: 0;
+            background-color: transparent;
+            outline: 0;
+            margin-left: auto;
+            i{
+                
+                font-size: 20px;
+                cursor: pointer;
+                transition: all .3s;
+                color: #ffffff;
+                &:hover {
+                    color: var(--primary-color);
+                }
+                
+                &:active {
+                    scale: 1.1;
+                }
+                &.pi-heart-fill {
+                    color: var(--primary-color);
+                }
+            }
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--primary-color);
+
+        .details{
+            display: flex;
+            align-items: center;
+            margin: auto 0;
+            gap: 5px;
+            // background-color: rgb(37, 37, 37);
+            border-radius: 40px;
+            padding: 0 5px;
+            font-size: 10px;
+            color: var(--surface-800);
+            .titles{
+                display: flex;
+                flex-direction: column;
+                h4{
+                    margin-bottom: 0;
+                    overflow:hidden;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient:vertical;
+                    display:-webkit-box;
+                    white-space:normal;
+                    font-weight: 500;
+                }
+                span{
+                    line-height: .7rem;
+                    font-size: .6rem;
+                    color: #ffffff;
+                    background-color: var(--primary-color);
+                    width: max-content;
+                    padding: 0 5px;
+                    border-radius: 20px;
+                }
+            }
+        }
+    }
+}

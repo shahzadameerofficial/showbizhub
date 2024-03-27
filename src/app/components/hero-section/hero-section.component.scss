@@ -1,0 +1,205 @@
+.hero-section{
+    transition: all 300ms;
+    position: relative;
+    .hero{
+        height: calc(100% - 5px);
+        background-position: center;
+        animation: moveIt 10s infinite;
+        background-size: 100%;
+        transition: all 300ms;
+        aspect-ratio: 16/4;
+        img{
+            width: 100%;
+            object-fit: contain;
+            opacity: 0;
+            display: none;
+        }
+    }
+    .content{
+        // backdrop-filter: blur(3px);
+        background: linear-gradient(to left,#0000003b 30%, #000000 100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 5px);
+        z-index: 1;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        cursor: grab;
+        &:active{
+            cursor: grabbing;
+        }
+        .poster{
+            img{
+                width: 180px;
+                border-radius: 10px;
+            }
+        }
+        .details{
+            max-width: 30%;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            user-select: none;
+            svg{
+                width: 5px;
+                height: 5px;
+            }
+            h2{
+                margin-bottom: 0;
+                color: var(--primary-color);
+                font-weight: 600;
+            }
+            p{
+                margin-bottom: 0;
+                color: var(--surface-500);
+                overflow:hidden;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient:vertical;
+                display:-webkit-box;
+                white-space:normal;
+            }
+            .btns{
+                display: flex;
+                gap: .5em;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        }
+        
+    }
+}
+@media screen and (max-width: 1120px){
+    .hero-section{
+        .content{
+            .poster{
+                img{
+                    width: 150px !important;
+                }
+            }
+            .details{
+                p{
+                    -webkit-line-clamp: 2;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 991px){
+    .hero-section{
+        .hero{
+            aspect-ratio: 16/6;
+        }
+        .content{
+            .poster{
+                img{
+                    width: 190px !important;
+                }
+            }
+            .details{
+                max-width: 50%;
+                p{
+                    -webkit-line-clamp: 4;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 863px){
+    .hero-section{
+        .hero{
+            aspect-ratio: 16/8;
+        }
+        .content{
+            .poster{
+                img{
+                    width: 210px !important;
+                }
+            }
+            .details{
+                max-width: 80%;
+                p{
+                    -webkit-line-clamp: 4;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px){
+    .hero-section{
+        .hero{
+            aspect-ratio: 8/4;
+        }
+        .content{
+            width: 100%;
+            .poster{
+                img{
+                    display: none;
+                    width: 210px !important;
+                }
+            }
+            .details{
+                max-width: 100%;
+                p{
+                    -webkit-line-clamp: 4;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 577px){
+    .hero-section{
+        .hero{
+            aspect-ratio: 8/3;
+        }
+        .content{
+            position: static;
+        }
+    }
+}
+@keyframes moveIt{
+   
+    0%{
+        background-position: left;
+    }
+    5%{
+        // background-size: 45%;
+        background-position: right;
+    }
+    50%{
+        background-position: top;
+        background-size: 50%;
+    }
+    55%{
+        // background-size: 35%;
+        background-position: top left;
+    }
+    73%{
+        
+        background-size: 90%;
+    }
+    100%{
+        background-position: center;
+    }
+}
+// @keyframes moveIt{
+//     0%{
+//         background-position: 30%;
+//     }
+//     30%{
+//         background-position: 10%;
+//     }
+//     55%{
+//         background-position: 56%;
+//     }
+//     78%{
+//         background-position: 88%;
+//     }
+//     100%{
+//         background-position: 50%;
+//     }
+// }

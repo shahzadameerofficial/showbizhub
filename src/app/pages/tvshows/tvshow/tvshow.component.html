@@ -1,0 +1,233 @@
+<app-page-loader [loading]="isLoading"></app-page-loader>
+<div
+  class="tv-show"
+  [ngStyle]="{
+    'background-image': 'url(' + imageUrl + tvshow?.backdrop_path + ')'
+  }"
+>
+  <div class="grid-container">
+    <div class="poster-section">
+      <div class="poster">
+        <img [src]="imageUrl + tvshow?.poster_path" alt="" />
+        @if(tvshow?.status) {<button>{{tvshow?.status}}</button>}
+      </div>
+      <div class="tvshow-details">
+        <h4>About <span>{{tvshow?.name}}</span></h4>
+        <app-details-line label="Status" *ngIf="tvshow?.status">
+          <span>{{tvshow?.status}}</span>
+        </app-details-line>
+        <app-details-line label="Popularity" *ngIf="tvshow?.popularity">
+          <span>{{tvshow?.popularity}}</span>
+        </app-details-line>
+        <!-- <app-details-line label="Budge" *ngIf="tvshow?.budget">
+          <span>{{tvshow?.budget}}</span>
+        </app-details-line>
+        <app-details-line label="Revenue" *ngIf="tvshow?.revenue">
+          <span>{{tvshow?.revenue}}</span>
+        </app-details-line> -->
+        <div class="production-companies" *ngIf="tvshow?.production_companies">
+          <h4>Production Companies</h4>
+          <app-details-line  [label]="company.name" [src]="company.logo_path" [title]="company.name"*ngFor="let company of tvshow?.production_companies" routerLink="/discover" [queryParams]="{mediaType:'tv', withCompanies: company.id}">
+            <span>
+              {{company.origin_country}}
+            </span>
+          </app-details-line>
+        </div>
+        <div class="production-countries" *ngIf="tvshow?.production_countries">
+          <h4>Production Countries</h4>
+          <app-details-line  [label]="country.name" [title]="country.name"*ngFor="let country of tvshow?.production_countries" routerLink="/discover" [queryParams]="{mediaType:'tv', withOriginCountry: country.iso_3166_1}">
+            <span>
+              {{country.iso_3166_1}}
+            </span>
+          </app-details-line>
+        </div>
+        
+        <div class="Languages" *ngIf="tvshow?.spoken_languages">
+          <h4>Languages</h4>
+          <app-details-line  [label]="language.name" [title]="language.english_name"*ngFor="let language of tvshow?.spoken_languages" routerLink="/discover" [queryParams]="{mediaType:'tv', withOriginLanguage: language.iso_639_1}">
+            <span>
+              {{language.iso_639_1}}
+            </span>
+          </app-details-line>
+        </div>
+      </div>
+    </div>
+    <div class="details-section">
+      <div class="top-titles">
+        @if (tvShowVideos?.length > 0 && currentVideo) {
+          <lightgallery [settings]="VideoSettings">
+            <a [href]="currentVideo">
+              <p-button icon="pi pi-play" [rounded]="true" title="Watch Video"></p-button>
+            </a>
+          </lightgallery>
+        }
+        <h1>
+          {{ tvshow?.name }}
+          <span class="custom-bedge" [title]="tvshow?.first_air_date | date">{{
+            tvshow?.first_air_date | date : "yyyy"
+          }}</span>
+        </h1>
+        
+        <app-circle-rating
+          [max]="10"
+          [current]="tvshow?.vote_average?.toFixed(1)"
+        ></app-circle-rating>
+        
+      </div>
+      @if(tvshow?.tagline){<div class="tagline">{{tvshow?.tagline}}</div>}
+      <div class="sub-details">
+        <div class="genre">
+          <a
+            routerLink="/discover"
+            *ngFor="let genre of tvshow?.genres"
+            [queryParams]="{mediaType: 'tv', withGenres: genre.id}"
+          >
+            <div class="custom-bedge d-flex">
+              <i class="pi pi-search"></i>{{ genre?.name }}
+            </div>
+          </a>
+        </div>
+        <span
+          >{{ tvshow?.number_of_seasons }}
+          {{ tvshow?.number_of_seasons ? "Seasons" : "Season" }}</span
+        >
+        <span>&bull; {{ tvshow?.number_of_episodes }} Episodes</span>
+        <span>&bull; {{ tvshow?.episode_run_time }} Min/Episode</span>
+      </div>
+      <div class="btns" *ngIf="tvshow?.homepage">
+        <a [href]="tvshow?.homepage" *ngIf="tvshow?.homepage" target="_blank">
+        <p-button icon="pi pi-home" label="Visit Homepage" [outlined]="true" size="small" [rounded]="true"></p-button>
+        </a>
+      </div>
+      <div class="overview">
+        <h1>Overview</h1>
+        <p>
+          {{ tvshow?.overview }}
+        </p>
+        <div class="keywords">
+          @for (keyword of keywords; track $index) {
+          <app-custom-tag severity="tags" routerLink="/discover"
+          [queryParams]="{mediaType: 'tv', withGenres: keyword.id}">
+            <i class="pi pi-hashtag"></i>
+            <span>{{ keyword.name }}</span>
+          </app-custom-tag>
+          }
+        </div>
+        
+      </div>
+      <div class="cast">
+        <h1>Cast {{ credits?.cast?.length }}</h1>
+        <p-carousel
+          [value]="credits?.cast"
+          [numVisible]="6"
+          [numScroll]="6"
+          [circular]="true"
+          [autoplayInterval]="5000"
+        >
+          <ng-template let-cast pTemplate="item">
+            <app-mini-celebrity-card [cast]="cast"></app-mini-celebrity-card>
+          </ng-template>
+        </p-carousel>
+      </div>
+      <div class="crew" *ngIf="credits?.crew.length > 0">
+        <h1>Crew {{ credits?.crew?.length }}</h1>
+        <p-carousel
+          [value]="credits?.crew"
+          [numVisible]="6"
+          [numScroll]="6"
+          [circular]="true"
+          [autoplayInterval]="5000"
+        >
+          <ng-template let-crew pTemplate="item">
+            <app-mini-celebrity-card [crew]="crew"></app-mini-celebrity-card>
+          </ng-template>
+        </p-carousel>
+      </div>
+      <p-tabView>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <i class="pi pi-user"></i>
+            <span>Backdrops</span>
+            <app-custom-bedge>{{seriesImages?.backdrops?.length?.toString()}}</app-custom-bedge>
+          </ng-template>
+          <app-media-gallery
+            [images]="seriesImages?.backdrops"
+            thumbnailKey="file_path"
+            type="backdrops"
+            [defaultTile]="tvshow?.name"
+          ></app-media-gallery>
+        </p-tabPanel>
+
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <i class="pi pi-user"></i>
+            <span>Posters</span>
+            <app-custom-bedge>{{seriesImages?.posters?.length?.toString()}}</app-custom-bedge>
+          </ng-template>
+          <app-media-gallery
+            [images]="seriesImages?.posters"
+            thumbnailKey="file_path"
+            type="posters"
+            [defaultTile]="tvshow?.name"
+          ></app-media-gallery>
+        </p-tabPanel>
+
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <i class="pi pi-user"></i>
+            <span>Videos</span>
+            <app-custom-bedge>{{tvShowVideos?.length?.toString()}}</app-custom-bedge>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-media-gallery
+              [videos]="tvShowVideos"
+              thumbnailKey="key"
+              type="posters"
+            ></app-media-gallery>
+          </ng-template>
+        </p-tabPanel>
+
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <i class="pi pi-video"></i>
+            <span>Similar</span>
+            <app-custom-bedge>{{similar?.total_results.toString()}}</app-custom-bedge>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-cards-container
+              infiniteScroll
+              [infiniteScrollDistance]="2"
+              [infiniteScrollThrottle]="500"
+              (scrolled)="appendMoreTvShows('similar', 'similar')"
+              [scrollWindow]="true"
+            >
+              @for (movie of similar.results; track $index) {
+              <app-tvshow-card [tvShow]="movie"></app-tvshow-card>
+              }
+            </app-cards-container>
+          </ng-template>
+        </p-tabPanel>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <i class="pi pi-video"></i>
+            <span>Recommended</span>
+            <app-custom-bedge>{{recommended?.total_results.toString()}}</app-custom-bedge>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-cards-container
+              infiniteScroll
+              [infiniteScrollDistance]="2"
+              [infiniteScrollThrottle]="500"
+              (scrolled)="appendMoreTvShows('recommendations', 'recommended')"
+              [scrollWindow]="true"
+            >
+              @for (movie of recommended.results; track $index) {
+              <app-tvshow-card [tvShow]="movie"></app-tvshow-card>
+              }
+            </app-cards-container>
+          </ng-template>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</div>

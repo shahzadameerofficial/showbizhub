@@ -1,0 +1,68 @@
+<p-toast position="top-right"></p-toast>
+<div
+  class="cards-container"
+  infiniteScroll
+  [infiniteScrollDistance]="1"
+  [infiniteScrollThrottle]="250"
+  (scrolled)="getMoreResults()"
+  [scrollWindow]="true"
+>
+
+    
+    <!-- Movies Results -->
+  @if (containerType === 'movies' && moviesResults.results.length > 0){ 
+    @for (movie of moviesResults.results; track $index) {
+  <app-movie-card [movie]="movie" (onFavorite)="showToast($event)" ></app-movie-card>
+  }
+
+  <!-- TV Shows Results -->
+  } @else if (containerType === 'tvshows' && tvshowResults.results.length > 0) { 
+    @for (tvshow of tvshowResults.results; track $index) {
+  <app-tvshow-card [tvShow]="tvshow" (onFavorite)="showToast($event)"></app-tvshow-card>
+  } 
+
+  <!-- Celebrities Results -->
+  } @else if (containerType === 'celebrities' && celebritiesResults.results.length > 0) {
+     @for (celebrity of celebritiesResults.results; track $index) {
+  <app-celebrity-card [person]="celebrity" (onFavorite)="showToast($event)"></app-celebrity-card>
+  } 
+
+  <!-- Combined Results -->
+  }@else if(containerType === 'combined' && combinedResults.results.length > 0) { 
+    @for (item of combinedResults.results; track $index) { 
+        @if (item.media_type == 'movie') {
+            <app-movie-card [movie]="item" (onFavorite)="showToast($event)"></app-movie-card>
+        }@else if(item.media_type === 'tv'){
+            <app-tvshow-card [tvShow]="item" (onFavorite)="showToast($event)"></app-tvshow-card>
+        }@else{
+            <app-celebrity-card [person]="item" (onFavorite)="showToast($event)"></app-celebrity-card>
+        }
+    } 
+  }
+  
+  <!-- Loader -->
+  @if (loading) {
+    @for (item of loader; track $index) {
+      
+      <app-card-skeleton></app-card-skeleton>
+    }
+  }
+  
+  <ng-content></ng-content>
+</div>
+
+  <!-- Load More Button -->
+@if (!autoLoad) {
+  <div style="text-align: center;">
+    <p-button label="Load More" [rounded]="true" size="small" (onClick)="startLoading()"></p-button>
+  </div>
+}
+
+@if (loadError) {
+    <div class="content">
+      <h1>Showbizhub Failed to Load Your Requested Content!</h1>
+      <p>You Might Have Internet Connection Error!</p>
+      <span>Please Try Again Later</span>
+      <p-button label="Reload" icon="pi pi-load" [rounded]="true" size="small" (onClick)="reloadComponent()"></p-button>
+    </div>
+}

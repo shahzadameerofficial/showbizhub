@@ -1,0 +1,168 @@
+<div class="wrapper">
+  <ngx-loading-bar
+    [includeSpinner]="false"
+    ref="router"
+    color="var(--primary-color)"
+  ></ngx-loading-bar>
+  <ngx-loading-bar
+    [includeBar]="false"
+    ref="http"
+    color="var(--primary-color)"
+  ></ngx-loading-bar>
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+  <app-scroll-top></app-scroll-top>
+  <p-dialog
+    header="Header"
+    [(visible)]="visible"
+    [modal]="true"
+    [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [draggable]="false"
+    (onHide)="updatePopup()"
+  >
+    <ng-template pTemplate="header">
+      <div class="inline-flex align-items-center justify-content-center gap-2">
+        <span class="font-bold white-space-nowrap">Amy Elsner</span>
+      </div>
+    </ng-template>
+    <div class="mypopup">
+      <h2 style="margin-bottom: 0">
+        Designed & Developed By <a href="">Shahzad Ameer</a>
+      </h2>
+      <div class="socialIcons">
+        <app-custom-tag severity="tags">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFFklEQVR4nNVaW28bRRRewQPwL7g/IUqhQMtFFQIJiQcegKASLhGKZ7wzjmkjtaJAFbcJQYii3mhEIQ0U0pK2UdSCUIln7CSQxqEhTnMjhQRoYprGKaCkJW6rpPagM+kuG9tbex07uz3SJ+9cdvx9njNnds9YUfJkpc30TsToq4iTasToQcwox5x2SsA1Iw3Qhv3kFRz03qE4wVxMXYkZrUGcRjCnwgrgHsTpbnfA/dCSki46XHQjCnjWYEb7rJI2BzmJGSny+Xw3FJS8K6A+jjgdyB9xmjQrpBcFySN5J14eKr8FcfoxZjRRKPJYA6MJcK2S1pKb80IeFlx+3SV7tyKc3L4o8qpfvQdzMr705Om8SzEyoXJ1eW7kubocczptF3n8P6ZdfnpfDm5Dog4gL7SZyNqdYPHIsOYA4ngBSD8Ek4wCZLSxnSxND0Zrru06nD62JKEydwEJxMhq8x22gJtUPjc7X7odWz4eOIAgzmomSFGq+9iyWdEcQU6mPlXaTopanAXPCuOvX2M7IW4NiNFdxugzZtaxvG2DOPrbN+KHM+0SlT9WO2QGyKgk72buu8w6eVvWicnYpDBaTe8e+8nzebj8Zbcp8Bpo1mFPX61OPDDWIuqHvhJvtW9yjgBOX1bke2qaxp09u0XHeEiST4iE+LR/r/jEgO3hXfr1xquivC3let367zcKNVAmPuzeLr4c2i/70+Ab+viNw02iaeSoeL9rq6gb3CevNWzq2CwO/doox8ngRpUK5uRQusZokusk29A/p8T4v+Pymo8F5T21/XWyPBefE1s63xWj58cW3HN2ZkJUhLbIvrPxWVkXjUVTxtbqBv4azCSgQUGMsHSNwUiriFz4Ux+0OxqWmLo8rQs4MvK1vJ6MnZP3nJjokuWeyV7ZrvWrHfhMkgGLXIgId8CjC7iSuCJnuivarX/X9OVp6bL7fq7P4EakGQSEzDoc/OWw7kJaXe+5Pp0YrAdoA6vsrBax2Zi8rh86oNe3RtqkWwAhzXyhSl1AMNIqx90W3qm37+j5KLt1wGjHogRAeXhqRJYH/x6SnxfnLor3Tnygk7k0d0kKMwIIagKaho+kCNgcqrIkgC1GwP5TDQv89/h4SHiCa0U8EZflvQOfy35vtr8jQzCEZuMaaMogYE1diVhV/LR4puKF9C5ktoizFQAbHSxazYCItobAQMjp86NiZnZGlsdgDXBP1gJWPPekuPv+lRKvNaI0i9gkjGYrwFgHCxwWKNTBLIDfG8WBkLePV8h2WKix2Zj8Dihv/Wmb7mJapAI84X1Wkr/3qdWi9JiaJoxCrtJEAMTtdW3rJbQ6iPVQhk+tDsgm1xnHgJAKLpSVX/MUPxcvffG6KP02ibyEWiyTsjkN7JRHCTB4MLKbDLYIxOjvimaQyrObELaOHboA7KcPO4CQsAKXnzygC5AiHJkLounBSFhJNhejL9pOjGcHxNXnUwRAqgJSFo4nz2iP6UEIHPcgTuLO/eVJHHPPqrTkr4eIhIwv8mbmPea9CabJbrI4GYz2ZZXcBYNUNqS0bSfNdZx1f+e+VbFicKjgiAMORqbczWXLlFyPmBCjZ67LIyajO9myyTEStuw21zy1gfTjEpwdIE7iEG0gmCj5Nre/7NFCbnaI0R5INCuFNNgFIT+fV7diJAyPBwX/q0GyIU4ehOlGnJ62Tpz8AY/EC9Lkdtr8YleLESNVmNMDkO2AlM1VQOYD6qqgj/4mlQf7DyniC9HH84lmAAAAAElFTkSuQmCC"
+          />
+          <span>Fiverr Profile</span>
+        </app-custom-tag>
+        <app-custom-tag severity="tags">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADTElEQVR4nO2Y+0tTYRjH9wfZ5ZhZEhqpoD/YxcxES5EIgihCupKEoQiZKV1NoYggqOyCWCsS6fZDimYUVJ5dnFu66S66m1vbzs6eeA4kuvOeec5qvlPPF55ftvd93ufzPM972TQMmwGrwTS0A1BBWLUiGdTbh1H3CEs/04xaEZZ+dhm1Iiz9jKoVYdfKE6Xb/QgWigcezllPg9zxqA7nDfogw4EhUWCdrg5QMv7H7++rA4SLcZCr3yo5p2SsCNrsl0HrfQGDgQH44H8HD2bvw4nJY5CtY9IHBEVqx2JjIfT53gjtKqVpbhoapurTB+S1V7to3OFfteCJekCuXnm1sFm3kT5IgA/Mt1eluRyCfBCUSut9SR8EdcXeIvS8JWyGZHXBdp4+iItzwjVHu+T3I8HPwiZ/6u6G2egscYydsydssWUBQZE2diQWgbrJ44v87DDkwsDcJ6IPPM2og5B003md6CvfkEusDFYt7UBiEIMCQ56kv2fuJ6I5/b4+5SCk8na5bks6+hb8qghkLGxMuHnvzdwVzfnof68cBI+8eOENTBqbpdsAPt6nCAQznghkmFDhHs9z5SBXHW0iR+FYCCrGy0RjW+0txGDf+vslQQwhA+w17SKufcZ6kjjnkr1ZOQgugn0cLyfngHrbWcjRZ0GxsQA6nbeIJ9Ic74ctukxiZReeWo/dD6HaXCn4KzLmC+2Lb7R44Wf4vWIQNOzJZIU9jj4wsP8hrURbywIpNZUITwylskaskKfPEXwMBQb/GcLFOYUjOWkQtFPWOmKppeSNeqHKvF+YizdxMm+reH81lqqEMcoCQTs6cUTIylIyhgxQPl46P6/aXCV59MoRGxqFfeN7loxPNggatgr2uy1iXbQYbvTR0E9onm4U/Rhqd7QSM7yJXQ+HLDXQ6+kRtS4PPHwJjkDjVIMwLqV/PhQat8MBc4XQQn/3AslIx2/8pYbBlpp2Qq3lIJSZdsM2fbbieJIGkWOZ7DqYic6IQPAVnIr1NKkCwSyThJlfUSBNUxdFEOFYWLgkVxRIr6eH+AMqVetpUuV4MjIhArnj6lp5ILa4YxofnHIuNibdQJbbNLQDUEFYtSIZ1NuHUfcISz/TjFoRln52mbVckT8w8BOY61aEYAAAAABJRU5ErkJggg=="
+          />
+          <span>Upwork Profile</span>
+        </app-custom-tag>
+        <app-custom-tag severity="tags">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACtUlEQVR4nO2ay2sTQRzHNyMe9Sz4Ogn1LOIL/wQRfF1E8Fn7D4hnqXQmFj2IguSiTWsvldaqVS9VD0qluM1M0pCQVLpGjEmIadI0j+b1k9lUzGMTNiu6s7I/+N5mZr+fnd9vf0MyktQYZHGXA1MnwsyDMIsjQlNCCLM498S9cY+SVqAhOoAILSDCQGzRAiKeq83mCb1kvjHWm4boQN39sLwbYVo03RDpfSfUdHIQest8M8yQHIQSSS1YAcwgI8JUlhBhCdONEMNKcIC0AEbAoNK6AM6/iMCn73mIrZVhVsnCwZGwdQAuzkSgNfLlKux5ELAGwEIsD1qB5+LWAIjnypoAj/0r1gCYVbKaANfeRK0BcMgdhlyp2mQ++KMIW+/4rAGACIO9riA45xJq2vA3L4h50A0gsNL/P8DYYgomAuk2XX/bXMS8uWmN4zrs/t34tt31w+WXX+G+nIQRXwruyUl1rf2PQrDpbwC0FvCvmA5lmsadnFSgU5yeUlRzN97HoFipdRw3H83B0bEl8QDOPFXA7UuBnliv1ODc84hYAO8ia7rMN0Ic0Hfe+jcARmI+mhMToLbxhvXEkdGwOACRTAlOTCqw5Xa9Ce57GIJXn1e7zhn8EBMDYHW9Cn2uYNvam51emFnKdJzHz2FCAAx/THRcv88VVNNKK/iZSwiAs8++dDUSSBY15yVyZTEATk0pXY287lALa6WqOJ242zOmQ9p1YAMgewfqYacQsYu4PeyvELE/o2A3MmSFTvwtW4JUodKm8ZbfRo9NLGuO4zr+ZLmrkXH/iuY8/uw/BhBcaWv/xYRZnAMsWBeAypJ6tcBsI8SYHIRhSbrp2Y4wy5ttBvUsWpAGfTs3rhp4LphviPUm7O1vvi+Bvf2W2AmseryieWOFbwnPK14c4l23obKa84TtaPT8E/rGImgIjaOUAAAAAElFTkSuQmCC"
+          />
+          <span>LinkedIn Profile</span>
+        </app-custom-tag>
+      </div>
+      <h2>
+        <strong
+          >Unleash Your Inner Cinephile: Explore Movies, TV Shows &amp;
+          Celebrities with <a href="">ShowbizHub <i class="pi pi-link"></i></a
+        ></strong>
+      </h2>
+      <p>
+        <strong
+          ><a href="">ShowbizHub <i class="pi pi-link"></i></a
+        ></strong>
+        is your one-stop destination for exploring the vast world of
+        entertainment. Whether you're a movie buff, a TV show enthusiast, or
+        simply curious about celebrities, our app offers a
+        <strong>rich and immersive experience</strong> designed by a
+        <strong>passionate frontend developer</strong> (<strong
+          ><a href="">Shahzad Ameer</a></strong
+        >).
+      </p>
+      <p>
+        <strong>Dive into a Sea of Content:</strong>
+      </p>
+      <ul>
+        <li>
+          <strong>Extensive library:</strong> Discover a massive collection of
+          movies, TV shows, and celebrities, all conveniently accessible through
+          our user-friendly interface.
+        </li>
+        <li>
+          <strong>Seamless filtering:</strong> Refine your search with
+          <strong>advanced filters</strong> based on genre, year, popularity,
+          and more. Find exactly what you're looking for with ease.
+        </li>
+        <li>
+          <strong>Infinite scrolling:</strong> Never run out of content to
+          explore! Our <strong>infinite scrolling feature</strong> seamlessly
+          loads more results as you browse, keeping the entertainment flowing.
+        </li>
+      </ul>
+      <p><strong>Unveiling the Details:</strong></p>
+      <ul>
+        <li>
+          <strong>In-depth information:</strong> Delve deeper with detailed
+          pages for each movie, TV show, and celebrity, packed with captivating
+          visuals and comprehensive information.
+        </li>
+        <li>
+          <strong>Visually stunning:</strong> Immerse yourself in the world of
+          entertainment with
+          <strong
+            >eye-catching movie cards, TV show cards, and celebrity
+            cards</strong
+          >
+          that showcase the best of what each has to offer.
+        </li>
+      </ul>
+      <p>
+        <strong>Personalize Your Experience:</strong>
+      </p>
+      <ul>
+        <li>
+          <strong>Create an account:</strong> Sign up for a free account to
+          <strong>save your favorite movies, TV shows, and celebrities</strong>
+          for easy access and future reference.
+        </li>
+        <li>
+          <strong>Light and dark themes:</strong> Choose the theme that best
+          suits your viewing preference, whether you prefer a
+          <strong>bright and airy</strong> or a
+          <strong>dark and cinematic</strong> experience.
+        </li>
+      </ul>
+      <p><strong>Built with Expertise:</strong></p>
+      <p>
+        <strong><a href="">Shahzad Ameer</a></strong
+        >, the <strong>skilled frontend developer</strong> behind this app, has
+        meticulously crafted it using
+        <strong>cutting-edge technologies</strong> like Angular, Firebase, and
+        various libraries, ensuring
+        <strong
+          >smooth performance, exceptional UI/UX design, and robust
+          functionality</strong
+        >.
+      </p>
+      <p><strong>Beyond the Basics:</strong></p>
+      <ul>
+        <li>
+          <strong>Search bar with autocomplete:</strong> Effortlessly find what
+          you're looking for with our
+          <strong>intelligent search bar</strong> that suggests relevant results
+          as you type.
+        </li>
+        <li>
+          <strong>Customizable settings:</strong> Tailor your experience with
+          <strong>customizable settings</strong> like language and preferred
+          content.
+        </li>
+      </ul>
+      <p>
+        <strong>Experience the Difference:</strong>
+      </p>
+      <p>
+        <strong
+          ><a href="">ShowbizHub <i class="pi pi-link"></i></a
+        ></strong>
+        is not just an app, it's a portal to a world of entertainment,
+        meticulously crafted by a
+        <strong>talented frontend developer</strong> (<strong
+          ><a href="">Shahzad Ameer</a></strong
+        >) with a passion for user experience. Visit today and
+        <strong>explore, discover, and immerse yourself!</strong>
+      </p>
+    </div>
+    <ng-template pTemplate="footer"> </ng-template>
+  </p-dialog>
+</div>

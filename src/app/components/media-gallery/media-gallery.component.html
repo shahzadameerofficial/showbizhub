@@ -1,0 +1,44 @@
+<div class="media-gallery">
+  @if (images) {
+  <lightgallery [settings]="settings" class="grid-container">
+    @for (item of images; track $index) {
+    <a [href]="previewUrl + item[thumbnailKey]" [title]="defaultTile || ''">
+      @if (type == 'backdrops') {
+        <app-img
+        [alt]="defaultTile || ''"
+        [src]="url() + item[thumbnailKey]"
+        style="aspect-ratio: 16/9;"
+      />
+      }@else {
+        <app-img
+        [alt]="defaultTile || ''"
+        [src]="url() + item[thumbnailKey]"
+        style="aspect-ratio: 0.667;"
+      />
+      }
+    </a>
+    }
+  </lightgallery>
+
+  } @else if(videos) {
+
+  <!-- Video Section Code -->
+
+  <lightgallery [settings]="settings2" class="grid-container">
+    @for (item of videos; track $index) {
+    <a [href]="youtubeEmbedUrl + item.key">
+      <div class="video-thumbnail" [title]="item.name">
+        <app-img [src]="thumbnailUrl + item.key + '/maxresdefault.jpg'" style="aspect-ratio: 16/9;"/>
+        <span class="title">{{ item.name }} | {{ item.site }}</span>
+        <i class="pi pi-play"></i>
+        <span class="tag" [title]="item.size + 'p Video'">{{
+          item.size >= 720 ? "HD" : "SD"
+        }}</span>
+        <span class="type">{{ item.type }}</span>
+        <span class="date">{{ item.published_at | date : "mediumDate" }}</span>
+      </div>
+    </a>
+    }
+  </lightgallery>
+  }
+</div>

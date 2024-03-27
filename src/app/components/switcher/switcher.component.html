@@ -1,0 +1,11 @@
+<div class="switchingTabs" [ngClass]="{'long': data.length > 3}">
+    <div class="tabItems">
+        @for (item of data; track item; let index = $index) {
+            
+        <a class="tabItem" [routerLink]="routes[index]" [class]="{'active': currentTab == index}" (click)="activeTab(item, index)">
+            {{item}}
+        </a>
+        }
+        <span class="movingBg" [style]="{left}" #movingbg></span>
+    </div>
+</div>

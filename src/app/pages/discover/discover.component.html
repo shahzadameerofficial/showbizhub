@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <!-- Header -->
+  <app-top-titles [label]="'Discover'">
+    <app-switcher
+      [data]="mediaTypes"
+      (newItemEvent)="updateMediaType($event)"
+      [active]="activeTab"
+    ></app-switcher>
+  </app-top-titles>
+  @if (mediaType == 'movie') {
+  <app-movie-filters (applyFilters)="applyFilters($event)"></app-movie-filters>
+
+  <app-cards-container
+    containerType="movies"
+    path="discover"
+    [params]="'/' + mediaType"
+    [queryParams]="appliedFilters"
+    [multipleResults]="true"
+  >
+  </app-cards-container>
+  }@else {
+  <app-tv-filters (applyFilters)="applyTvFilter($event)"></app-tv-filters>
+  <app-cards-container
+    containerType="tvshows"
+    path="discover"
+    [params]="'/' + mediaType"
+    [queryParams]="appliedTvFilters"
+    [multipleResults]="true"
+  >
+  </app-cards-container>
+  }
+</div>

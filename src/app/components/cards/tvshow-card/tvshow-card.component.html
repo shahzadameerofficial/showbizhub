@@ -1,0 +1,18 @@
+<div class="tvshow">
+  <div class="float-details">
+    <div class="episodes" *ngIf="tvShow.episode_count">
+      {{ tvShow.episode_count > 1 ? tvShow.episode_count +' Episodes' : tvShow.episode_count +' Episode'}}</div>
+    <button (click)="addToFavourites()"><i [class]="tvShow.isFavorite?.__zone_symbol__value == true ? 'pi pi-heart-fill' : 'pi pi-heart'"></i></button>
+  </div>
+  <a [routerLink]="'/tvshows/'+ tvShow.id">
+    <app-img [src]="tvShow.poster_path ? url + tvShow.poster_path : placeholder" style="aspect-ratio: 0.667;border-radius: .5rem;object-fit: cover;"></app-img>
+    <div class="details">
+      <app-circle-rating [max]="10" [radius]="18" [stroke]="4" [current]="tvShow?.vote_average?.toFixed(1)"></app-circle-rating>
+      <div class="titles">
+        <span>{{tvShow.first_air_date | date}}</span>
+        <h4>{{tvShow.adult ? '18+' : ''}} {{tvShow?.name}}</h4>
+      </div>
+    </div>
+  </a>
+  <div class="float-epcount" ></div>
+</div>

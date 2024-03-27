@@ -1,0 +1,36 @@
+<footer>
+    <div class="grid-container">
+        <div class="about">
+            <h1>About</h1>
+            <p>
+                
+                Welcome to our <span>Showbizhub</span>, A wide range Entertainment to help you get the latest information about movies, tvshows, celebrities, seasons and episodes. This app is just a demo of TMDB Api. It uses TMDB Api to get latest updates about movies, tvshows etc. Frontend of the app is designed with angular 17 with multiple npm packages. Explore the latest trends in the world of entertainment.
+            </p>
+        </div>
+        <div class="latest">
+            <h1>Latest</h1>
+            <!-- <div class="container" id="displayContainer">
+                <span>{{latest[0].title}}</span>
+                <span>Celebrity</span>
+            </div> -->
+            <ul>
+                <li><a [routerLink]="'/movies/' + latest?.movie?.id"><span>Movie</span> {{latest?.movie?.title}}</a></li>
+                <li><a [routerLink]="'/tvshow/' + latest?.tv?.id"><span>TV Show</span> {{latest?.tv?.name}}</a></li>
+                <li><a [routerLink]="'/celebrity/' + latest?.celebrity?.id"><span>Celebrity</span> {{latest?.celebrity?.name}}</a></li>
+            </ul>
+        </div>
+        <div class="links">
+            <h1>Links</h1>
+            <nav>
+                <a routerLink="/discover/">Discover+</a>
+                <a routerLink="/movies/">Explore Movies</a>
+                <a routerLink="/tvshows/">Explore TV Shows</a>
+                <a routerLink="/celebrities/">Explore Celebrities</a>
+                <a routerLink="/trending/">Trending</a>
+                <a routerLink="/login/">Login</a>
+                <a routerLink="/signup/">Register</a>
+            </nav>
+        </div>
+    </div>
+    <div class="bottom-footer">This app is demo of TMDB Api, Developed & Designed in Angular by Shahzad Ameer</div>
+</footer>

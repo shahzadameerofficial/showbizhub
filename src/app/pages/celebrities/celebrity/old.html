@@ -1,0 +1,181 @@
+<div class="container-fluid">
+    <div class="profile">
+        <div class="parent">
+            <div class="profilepic">
+                <span class="adultperson" *ngIf="currentPerson?.adult">18+</span>
+            </div>
+            <div class="details">
+                <div class="name">{{currentPerson?.name}}</div>
+                <div class="social">
+                    <a [href]="'https://www.facebook.com/'+externalIDs?.facebook_id" target="_blank" class="facebook" *ngIf="externalIDs?.facebook_id" [title]="'Click to see Facebook Profile of '+ currentPerson?.name">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+
+                    <a [href]="'https://www.instagram.com/'+externalIDs?.instagram_id" target="_blank"  class="insta" *ngIf="externalIDs?.instagram_id" [title]="'Click to see Instagram Profile of '+ currentPerson?.name">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a [href]="'https://www.twitter.com/'+externalIDs?.twitter_id" target="_blank"  class="twitter" *ngIf="externalIDs?.twitter_id" [title]="'Click to see Twitter Profile of '+ currentPerson?.name">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+
+                    <a [href]="'https://www.tiktok.com/@'+externalIDs?.tiktok_id" target="_blank"  class="tiktok" *ngIf="externalIDs?.tiktok_id" [title]="'Click to see Tiktok Profile of '+ currentPerson?.name">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+
+                    <a [href]="'https://www.youtube.com/'+externalIDs?.youtube_id" target="_blank"  class="youtube" *ngIf="externalIDs?.youtube_id" [title]="'Click to see Youtube Channel of '+ currentPerson?.name">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+
+                    <a [href]="'https://www.imdb.com/name/'+externalIDs?.imdb_id" target="_blank"  class="imdb" *ngIf="externalIDs?.imdb_id" [title]="'Click to see IMDb Profile of '+ currentPerson?.name">
+                        <i class="fa-brands fa-imdb"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="parent3">
+            <a [routerLink]="['/movies',coverPhotos[img].id]">
+                <span>{{coverPhotos[img].title}} ({{coverPhotos[img].release_date | date : 'yyyy'}})</span>
+                &nbsp;<i class="fa-solid fa-circle-info"></i>
+            </a>
+        </div>
+    </div>
+    <!-- <div class="moreDetails my-3">
+        <h2 class="personheadings">About <span class="titleName">{{currentPerson?.name}}</span></h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <div class="bio my-3">
+                        <h2 class="personheadings">Biograpy of <span class="titleName">{{currentPerson?.name}}</span></h2>
+                        <div class="biography textdata" [ngClass]="{'show':expandbiography}">{{currentPerson?.biography}}</div>
+                        <button (click)="expandbiography =! expandbiography" class="btn text-white">{{expandbiography?'Collapse':'See More'}}</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div> -->
+    <div class="container-fluid mt-3">
+        <div class="row my-2 text-secondary about">
+            <div class="col">
+                <span *ngIf="currentPerson?.known_for_department">&bull; {{currentPerson?.known_for_department}}</span>
+                <span *ngIf="currentPerson?.birthday"> &bull; Born {{currentPerson?.birthday | date}} at {{currentPerson?.place_of_birth}}</span>
+                <span *ngIf="currentPerson?.deathday"> &bull; Died {{currentPerson?.deathday | date}}</span>
+                <span *ngIf="currentPerson?.birthday"> &bull; Age {{currentPerson?.birthday | age}}</span>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <h1 class="personheadings">Biograpy of <span class="titleName">{{currentPerson?.name}}</span></h1>
+                <p class="p-2 text-secondary ">{{currentPerson?.biography}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="people-tab" data-bs-toggle="tab" data-bs-target="#peopletab"
+                        type="button" role="tab" aria-controls="contact" aria-selected="false">Movies <span class="counter">{{allMovies.cast.length + allMovies.crew.length}}</span></button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="tv-tab" data-bs-toggle="tab" data-bs-target="#tvtab" type="button"
+                        role="tab" aria-controls="contact" aria-selected="false">TV Shows<span class="counter">{{tvData.cast.length}}</span></button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="movies-tab" data-bs-toggle="tab" data-bs-target="#moviestab"
+                        type="button" role="tab" aria-controls="profile" aria-selected="true">Images<span class="counter">{{personImages.length}}</span></button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+
+                <div class="tab-pane fade" id="moviestab" role="tabpanel" aria-labelledby="profile-tab">
+
+                    <div class="row backdrops my-3">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-3"
+                            *ngFor="let image of personImages">
+                            <a [href]="'http://image.tmdb.org/t/p/original'+image.file_path" target="_blank" title="Click to View Full Picture">
+                                <img [src]="'http://image.tmdb.org/t/p/w342'+image.file_path" alt="" style="width: 100%;">
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="tab-pane fade  show active" id="peopletab" role="tabpanel" aria-labelledby="contact-tab">
+
+                    <div class="row my-3" *ngIf="moviesData">
+                        <details class="col-12" [open]="moviesData.cast.length>moviesData.crew.length">
+                            <summary>Cast ({{moviesData.cast.length}})</summary>
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4"
+                                    *ngFor="let movie of moviesData.cast">
+                                    <app-movie-card [movie]="movie" ></app-movie-card>
+                                </div>
+                            </div>
+                        </details>
+                        <details class="col-12" [open]="moviesData.crew.length>moviesData.cast.length">
+                            <summary>Crew ({{moviesData.crew.length}})</summary>
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4"
+                                    *ngFor="let movie of moviesData.crew">
+                                    <app-movie-card [movie]="movie" ></app-movie-card>
+                                </div>
+                            </div>
+                        </details>
+                        
+                    </div>
+                    <div class="row my-3">
+                        <div class="col text-center">
+                            <button (click)="loadmoreMovies()" class="loadMoreButton" *ngIf="allMovies?.length>20">Load Other {{allMovies.length - 20}} Movies</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="tvtab" role="tabpanel" aria-labelledby="contact-tab">
+
+                    <div class="row my-3">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4"
+                        *ngFor="let tv of tvData.cast">
+                            <app-tvshow-card [tvShow]="tv"></app-tvshow-card>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <h2 class="personheadings mt-3 mb-1">Images of <span class="titleName">{{currentPerson?.name}}</span></h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-2 mb-3" *ngFor="let image of personImages">
+                <img [src]="'http://image.tmdb.org/t/p/w342'+image?.file_path" alt="" style="width: 100%;border-radius: 10px;">
+                
+            </div>
+        </div>
+    </div> -->
+<!-- 
+    <div class="famousfilms">
+        <h2 class="personheadings">Movies of <span class="titleName">{{currentPerson?.name}}</span> <span class="badge badge-light">{{allMovies?.length}}</span></h2>
+        <div class="containerr container" #moviesContainer *ngIf="true">
+            <app-movie-item [movie]="movie" *ngFor="let movie of moviesData"></app-movie-item>
+        </div>
+        <div class="row my-3">
+            <div class="col text-center">
+                <button (click)="loadmoreMovies()" class="loadMoreButton" *ngIf="allMovies?.length>20">Load Other {{allMovies.length - 20}} Movies</button>
+            </div>
+        </div>
+    </div>
+    <div class="tvshows my-3">
+        <h2 class="personheadings my-2">TV Shows of <span class="titleName">{{currentPerson?.name}}</span></h2>
+        <div class="containerr container" #moviesContainer *ngIf="tvData">
+            <app-tv-show-item [tvShow]="tv" *ngFor="let tv of tvData"></app-tv-show-item>
+        </div>
+    </div> -->
+    
+    
+
+    
+    
+    <!-- <div class="biography">{{(currentPerson?.biography.length)}}</div> -->
+</div>

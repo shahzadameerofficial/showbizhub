@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-12">
+    <h2>{{loading? 'Please wait!!!' : ''}}</h2>
+    <p-card header="Settings" subheader="User Settings" [style]="{ width: '100vw', height:'calc(100vh - 2rem)', display: 'grid', placeItems: 'center' }">
+      <form class="row" [formGroup]="settingsForm" (ngSubmit)="updateUser()">
+        <div class="col-6">
+          <div class="p-float-label my-4">
+            <input pInputText id="username" formControlName="username" />
+            <label for="username">Username</label>
+          </div>
+          <p-dropdown formControlName="language" [options]="allLanguages" optionLabel="english_name" placeholder="Select a Language"></p-dropdown>
+          
+         
+        </div>
+        <p-button label="Save Changes" [loading]="loading" type="submit" icon="pi pi-check" [rounded]="true" size="small" [loading]="false"></p-button>
+        
+        <p-button label="Cancel" type="button" icon="pi pi-times" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }" [rounded]="true" size="small"></p-button>
+      </form>
+      <ng-template pTemplate="footer">
+      </ng-template>
+  </p-card>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<p-card
+  header="Login to ShowbizHub"
+  subheader="Enter Your Credentials"
+  [style]="{ width: '100vw', height:'calc(100vh - 2rem)', display: 'grid', placeItems: 'center' }"
+>
+  <form [formGroup]="signupForm" (ngSubmit)="signup()">
+    <div class="p-float-label my-4">
+      <input pInputText id="username" formControlName="username" />
+      <label for="username">Username</label>
+    </div>
+
+    <div class="p-float-label my-4">
+      <input pInputText id="email" formControlName="email" />
+      <label for="email">Email</label>
+    </div>
+    <div class="p-float-label my-4">
+      <p-calendar
+        formControlName="dateOfBirth"
+        inputId="birth_date"
+      ></p-calendar>
+      <label for="birth_date">Birth Date</label>
+    </div>
+    <span class="p-float-label">
+      <p-password formControlName="password" [toggleMask]="true">
+        <ng-template pTemplate="header">
+          <h6>Pick a password</h6>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <p class="mt-2">Suggestions</p>
+          <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+            <li>At least one lowercase</li>
+            <li>At least one uppercase</li>
+            <li>At least one numeric</li>
+            <li>Minimum 8 characters</li>
+          </ul>
+        </ng-template>
+      </p-password>
+      <label for="password">Password</label>
+    </span>
+    <div class="my-4">
+      <p-button
+        label="Signup"
+        icon="pi pi-check"
+        iconPos="right"
+        type="submit"
+        [rounded]="true"
+        size="small"
+        [disabled]="signupForm.invalid"
+      ></p-button>
+      <div style="margin-top: .3rem">
+        Already Have an Account? <a routerLink="/login">Login</a>
+      </div>
+    </div>
+  </form>
+</p-card>

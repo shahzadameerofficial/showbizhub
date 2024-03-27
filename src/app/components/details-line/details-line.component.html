@@ -1,0 +1,9 @@
+<a class="details-line" [routerLink]="routerLink" [queryParams]="queryParams">
+    @if (src || src == null) {
+        <img [src]="src && src != null ? logoPath + src : placeholder" [alt]="label || ''">
+    }
+    @if (label) {
+        <h5 [ngStyle]="{'margin' : src || src == null ? '0 auto 0 3px' : '0'}">{{label}}</h5>
+    }
+    <ng-content></ng-content>
+</a>

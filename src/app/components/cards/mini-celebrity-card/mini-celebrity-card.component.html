@@ -1,0 +1,34 @@
+@if (cast && !crew) {
+    <div class="mini-celebrity-card">
+        <a [routerLink]="'/celebrities/'+cast.id">
+            @if (!cast.profile_path) {
+                <img [src]="placeholder" alt="">
+            }@else {
+                <img [src]="url+cast.profile_path" alt="">
+            }
+            <div class="title">{{cast.original_name}}</div>
+            @if (cast.adult) {
+                <div class="character">{{cast.character}}</div>
+            }@else {
+                <div class="character">{{cast.character}}</div>
+            }
+        </a>
+    </div>
+}
+@else if (!cast && crew) {
+    <div class="mini-celebrity-card">
+        <a [routerLink]="'/celebrities/'+ crew.id">
+            @if (!crew.profile_path) {
+                <img [src]="placeholder" alt="">
+            }@else {
+                <img [src]="url+crew.profile_path" alt="">
+            }
+            <div class="title">{{crew.original_name}}</div>
+            @if (crew.adult) {
+                <div class="character">{{crew.job + " | " + crew.department}}</div>
+            }@else {
+                <div class="character">{{crew.job + " | " + crew.department}}</div>
+            }
+        </a>
+    </div>
+}

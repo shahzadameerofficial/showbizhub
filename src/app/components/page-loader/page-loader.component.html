@@ -1,0 +1,7 @@
+@if(loading){
+    <div class="page-loader">
+        <span class="loader"></span>
+        @if(message){<span class="message">{{message}}</span>}
+        @else if(placeholder){<span class="placeholder">Loading Please Wait...</span>}
+    </div>
+}

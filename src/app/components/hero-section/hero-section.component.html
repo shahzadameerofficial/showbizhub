@@ -1,0 +1,61 @@
+<div class="hero-section">
+  <p-carousel
+    [value]="movies"
+    [numVisible]="1"
+    [numScroll]="1"
+    [circular]="true"
+    [autoplayInterval]="5000"
+    [showNavigators]="false"
+    [showIndicators]="false"
+    [page]="currentIndex"
+    (onPage)="updatePage($event)"
+  >
+    <ng-template let-movie pTemplate="item">
+      <div
+        class="hero"
+        [title]="movie?.title"
+        [ngStyle]="{
+          'background-image': 'url(' + backdropUrl + movie?.backdrop_path + ')'
+        }"
+      >
+      </div>
+    </ng-template>
+  </p-carousel>
+  <div class="content" #herosection>
+    <div class="poster" *ngIf="movies.length>0">
+      <img [src]="posterUrl + movies[currentIndex].poster_path" alt="" />
+    </div>
+    <div class="details" *ngIf="movies.length>0">
+      <h2>
+        {{ movies[currentIndex].title }} ({{
+          movies[currentIndex].release_date | date : "yyyy"
+        }})
+      </h2>
+      <p-rating
+        [cancel]="false"
+        [ngModel]="movies[currentIndex].vote_average | rating"
+        [readonly]="true"
+        [title]="movies[currentIndex].vote_average | rating"
+      ></p-rating>
+      <app-custom-tag [title]="movies[currentIndex].release_date | date">{{
+        movies[currentIndex].release_date | releaseDate
+      }}</app-custom-tag>
+      <p>{{ movies[currentIndex].overview}}</p>
+      <div class="btns">
+        <p-button
+          [routerLink]="'/movies/' + movies[currentIndex].id"
+          [rounded]="true"
+          size="small"
+          icon="pi pi-play"
+        ></p-button>
+        <p-button
+          routerLink="/discover/"
+          [rounded]="true"
+          label="Discover"
+          size="small"
+          icon="pi pi-plus"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</div>

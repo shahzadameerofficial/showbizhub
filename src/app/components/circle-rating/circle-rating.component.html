@@ -1,0 +1,22 @@
+<div class="circle-rating" *ngIf="max && current">
+    <round-progress
+  [current]="current"
+  [max]="max"
+  [color]="current < 5 ? '#ff0000' : current < 7 ? '#ffa500' : '#78C000'"
+  [background]="'#eaeaea'"
+  [radius]="radius ? radius : 32"
+  [stroke]="stroke ? stroke : 8"
+  [semicircle]="false"
+  [rounded]="true"
+  [clockwise]="true"
+  [responsive]="false"
+  [duration]="800"
+  [animation]="'easeInOutQuart'"
+  [animationDelay]="0"
+  [title]="max + '/' + current"
+  
+  ></round-progress>
+  <div class="text-content">{{current}}</div>
+  <!-- [color]="'#45ccce'" -->
+
+</div>

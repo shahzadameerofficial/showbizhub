@@ -1,0 +1,52 @@
+<div class="wrapper">
+    <app-top-titles label="Favorites" showAs="column">
+        <p-tabView>
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <i class="pi pi-user"></i>
+                <span>Movies</span>
+                <app-custom-bedge>{{
+                  data.__zone_symbol__value.movies?.length.toString()
+                }}</app-custom-bedge>
+              </ng-template>
+              <app-cards-container [movies]="data.__zone_symbol__value.movies" containerType="movies"></app-cards-container>
+            </p-tabPanel>
+    
+            
+            <p-tabPanel>
+              <ng-template pTemplate="header">
+                <i class="pi pi-user"></i>
+                <span>TV Shows</span>
+                <app-custom-bedge>{{
+                  data.__zone_symbol__value.tvshows?.length.toString()
+                }}</app-custom-bedge>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <app-cards-container
+                  [tvshows]="data.__zone_symbol__value.tvshows"
+                  containerType="tvshows"
+                >
+                  
+                </app-cards-container>
+              </ng-template>
+            </p-tabPanel>
+            <p-tabPanel>
+                <ng-template pTemplate="header">
+                  <i class="pi pi-user"></i>
+                  <span>Celebrities</span>
+                  <app-custom-bedge>{{
+                    data.__zone_symbol__value.celebrities?.length.toString()
+                  }}</app-custom-bedge>
+                </ng-template>
+                <ng-template pTemplate="content">
+                  <app-cards-container
+                  containerType="celebrities"
+                    [celebrities]="data.__zone_symbol__value.celebrities"
+                  >
+                  </app-cards-container>
+                </ng-template>
+              </p-tabPanel>
+          </p-tabView>
+    </app-top-titles>
+    
+</div>

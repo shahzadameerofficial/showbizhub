@@ -1,0 +1,12 @@
+
+<ngx-loading-bar [includeSpinner]="false" ref="http" color="var(--primary-color)"></ngx-loading-bar>
+<span>
+    <img [src]="src" [alt]="alt || altText" [class]="class" [ngClass]="ngClass" [style]="style" (load)="loadImage()" (error)="checkError()" [loading]="loading" [title]="title" [ngStyle]="{
+        'opacity': imageLoaded ? '1' : '0'
+    }"/>
+    <div class="spinner" [ngStyle]="{
+        'visibility': imageLoaded ? 'collapse' : 'visible'
+    }">
+        <div class="loader"></div>
+    </div>
+</span>

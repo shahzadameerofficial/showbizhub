@@ -1,0 +1,57 @@
+.mini-celebrity-card {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    a{
+        text-decoration: none;
+    }
+    .title{
+        color: var(--accent);
+    }
+    img {
+        width: 128px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-bottom: 0;
+    }
+
+    .mybedge {
+        position: absolute;
+        top: 0;
+    }
+}
+
+.person {
+    margin: 10px 0;
+    text-align: center;
+    /* flex: 2; */
+    scroll-snap-align: center;
+
+    img {
+        margin: 0 auto;
+        width: 150px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .adult{
+            aspect-ratio: 1/1;
+            text-align: center;
+            padding: 4px 2px;
+            margin-left: 3px;
+            font-size: 0.8em;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            font-weight: 400;
+        }
+}

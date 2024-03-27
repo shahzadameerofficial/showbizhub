@@ -1,0 +1,12 @@
+.release-status{
+    color: #fff;
+    background-color: var(--accent);
+    border-radius: 20px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    padding: .5em;
+    text-transform: uppercase;
+}

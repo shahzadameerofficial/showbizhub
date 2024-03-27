@@ -1,0 +1,31 @@
+<div class="movie-card" *ngIf="movie" [ngClass]="{'active': movie.backdrop_path}">
+  <div class="float-btns">
+    @if (movie.character){
+      <span><i>as</i> {{movie.character}}</span>
+    }@else if(movie.job){
+      <span><i>as</i> {{movie.job}}</span>
+    }
+    <i
+      [class]="movie.isFavorite?.__zone_symbol__value === true ? 'pi pi-heart-fill' : 'pi pi-heart'"
+      [title]="movie.isFavorite?.__zone_symbol__value ? 'Add to Favorites' : 'Remove From Favorites'"
+      (click)="addToFavourites()"
+    ></i>
+  </div>
+  <a [routerLink]="'/movies/' + movie.id">
+      <app-img [src]="movie.poster_path ? posterUrl + movie.poster_path : placeholder" style="aspect-ratio: 0.667;border-radius: .5rem;object-fit: cover;"></app-img>
+    <div class="titles">
+      <h4>{{movie.adult ? '18+' : ''}}{{ movie.title }}</h4>
+      <div class="bottom">
+        <p-rating
+          [cancel]="false"
+          [ngModel]="movie.vote_average | rating"
+          [readonly]="true"
+          [title]="movie.vote_average | rating"
+          [iconOnStyle]="{ width: '12px', height: '12px' }"
+          [iconOffStyle]="{ width: '12px', height: '12px' }"
+        ></p-rating>
+        <span *ngIf="movie.release_date">{{ movie.release_date | date }}</span>
+      </div>
+    </div>
+  </a>
+</div>

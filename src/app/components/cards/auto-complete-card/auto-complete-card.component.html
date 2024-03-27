@@ -1,0 +1,30 @@
+<div class="auto-complete-card">
+    @if (item?.media_type == 'movie') {
+        <img [src]="'http://image.tmdb.org/t/p/w342'+item.poster_path" alt="">
+        <div class="details">
+            <h6>{{item.title}}</h6>
+            <app-custom-tag size="small">
+                <i class="pi pi-video"></i>
+                <span>{{item?.media_type}}</span>
+            </app-custom-tag>
+        </div>
+    }@else if (item?.media_type == 'tv') {
+        <img [src]="'http://image.tmdb.org/t/p/w342'+item.poster_path" alt="">
+        <div class="details">
+            <h6>{{item.name}}</h6>
+            <app-custom-tag size="small">
+                <i class="pi pi-play"></i>
+                <span>{{item?.media_type}}</span>
+            </app-custom-tag>
+        </div>
+    }@else{
+        <img [src]="'http://image.tmdb.org/t/p/w342'+item.profile_path" alt="">
+        <div class="details">
+            <h6>{{item.name}}</h6>
+            <app-custom-tag size="small">
+                <i class="pi pi-user"></i>
+                <span>{{item?.media_type}}</span>
+            </app-custom-tag>
+        </div>
+    }
+</div>

@@ -1,0 +1,154 @@
+.movie-details{
+    background-size: 100%;
+    background-attachment: fixed;
+    background-position: 50%;
+    aspect-ratio: 16/9;
+    position: relative;
+    transition: all .5s;
+    &:hover{
+        background-position: 50% 20%;
+        background-size: 50%;
+    }
+    a{
+        text-decoration: none;
+    }
+    .content{
+        padding: 70vh .5rem 0;
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        grid-gap: .5rem;
+        background: linear-gradient(to bottom, rgba(255,0,0,0 )50vh, var(--surface-a) 70vh);
+        .left-side{
+            padding: 0 0 .5rem 0;
+            .poster{
+                position: relative;
+                img{
+
+                    width: 100%;
+                }
+                .bedge{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    transform: translate(0,-50%);
+                }
+            }
+            .details{
+                h4{
+                    margin-bottom: 3px;
+                    border-left: 3px solid var(--primary-color);
+                    margin-left: 3px;
+                    padding-left: 5px;
+                    font-weight: 400;
+                    span{
+                        font-weight: 600;
+                        color: var(--primary-color);
+                    }
+                }
+            }
+
+        }
+        .right-side{
+            max-width: calc(100vw - 350px - 2rem);
+            color: var(--surface-800);
+            .top-titles{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                h1{
+                    font-size: 2rem;
+                    font-weight: 600;
+                    margin-bottom: 0;
+                }
+            }
+            .sub-details{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-bottom: 1rem;
+                .genre{
+                    display: flex;
+                    align-content: center;
+                    gap: .4rem;
+                }
+            }
+            .btns{
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                margin-bottom: 1rem;
+            }
+            .overview{
+                h1{
+                    margin-bottom: 0;
+                }
+                p{
+                    padding: 0.5rem;
+                    border-radius: 0.5rem;
+                    background-color: var(--surface-100);
+                    color: var(--surface-700);
+                }
+                .keywords{
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: .4em;
+                    font-size: .8em;
+                }
+            }
+        }
+    }
+    .custom-bedge{
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: .2rem .5rem;
+        border-radius: 1.4rem;
+        align-items: center;
+        gap: 3px;
+        i{
+            font-size: .8rem;
+        }
+    }
+}
+@media screen and (max-width: 991px){
+    .movie-details{
+        .content{
+            grid-template-columns: 250px 1fr;
+            padding-top: 60vh;
+            background: linear-gradient(to bottom, rgba(255,0,0,0 )40vh, var(--surface-a) 60vh);
+            .right-side{
+                max-width: calc(100vw - 250px - 2rem);
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px){
+    .movie-details{
+        .content{
+            grid-template-columns: 1fr;
+            padding-top: 50vh;
+            background: linear-gradient(to bottom, rgba(255,0,0,0 )30vh, var(--surface-a) 50vh);
+            .left-side{
+                display: grid;
+                grid-template-columns: 40% 1fr;
+                grid-gap: .5rem;
+            }
+            .right-side{
+                max-width: calc(100vw - 2rem);
+            }
+        }
+    }
+}
+@media screen and (max-width: 575px){
+    .movie-details{
+        .content{
+            padding-top: 30vh;
+            background: linear-gradient(to bottom, rgba(255,0,0,0 )10vh, var(--surface-a) 30vh);
+            .left-side{
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}
